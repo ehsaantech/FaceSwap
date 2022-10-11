@@ -225,7 +225,7 @@ def face_swap(src_face, dst_face, src_points, dst_points, dst_shape, dst_img, ar
 
     ## Shrink the mask
     kernel = np.ones((10, 10), np.uint8)
-    mask = cv2.erode(mask, kernel, iterations=1)
+    mask = cv2.erode(mask, kernel, iterations=2)
     ##Poisson Blending
     r = cv2.boundingRect(mask)
     center = ((r[0] + int(r[2] / 2), r[1] + int(r[3] / 2)))

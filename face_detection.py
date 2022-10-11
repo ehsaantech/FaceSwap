@@ -4,19 +4,19 @@ import dlib
 import numpy as np
 
 ## Face detection
-def face_detection(img,upsample_times=1):
+def face_detection(img,upsample_times=3):
     # Ask the detector to find the bounding boxes of each face. The 1 in the
     # second argument indicates that we should upsample the image 1 time. This
     # will make everything bigger and allow us to detect more faces.
     detector = dlib.get_frontal_face_detector()
-    print(detector)
-    sleep(int(20))
+    # print(detector)
+    # time.sleep(int(20))
     # input('Let us wait for user input. Let me know how many seconds to sleep now.\n')
     faces = detector(img, upsample_times)
 
     return faces
 
-PREDICTOR_PATH = 'predictors/shape_predictor_68_face_landmarks.dat'
+PREDICTOR_PATH = 'predictors/shape_predictor_81_face_landmarks.dat'
 predictor = dlib.shape_predictor(PREDICTOR_PATH)
 ## Face and points detection
 def face_points_detection(img, bbox:dlib.rectangle):
