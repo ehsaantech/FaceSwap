@@ -2,7 +2,9 @@
 import logging
 
 from detectors.comparedetectors import compareDetectors
-from predictors.comparepredictors import comparePredictors
+from faceswap import faceswapCli
+from facemorph import morphCli
+from predictors.comparepredictors import comparePredictorsCli
 
 if __name__ == '__main__':
   logging.basicConfig(level=logging.INFO)
@@ -20,14 +22,16 @@ if __name__ == '__main__':
     match selection:
       case 1:
         outputPath = compareDetectors(outputDirName='output')
-        print('Please check {0} for output'.format(outputPath))
+        print('Please check {} for output'.format(outputPath))
       case 2:
-        outputPath = comparePredictors(outputDirName='output')
-        print('Please check {0} for output'.format(outputPath))
+        outputPath = comparePredictorsCli(outputDirName='output')
+        print('Please check {} for output'.format(outputPath))
       case 3:
-        print('Face swapping')
+        outputPath = faceswapCli(outputDirName='output')
+        print('Please check {} for output'.format(outputPath))
       case 4:
-        print('Face Morphing')
+        outputPath = morphCli(outputDirName='output')
+        print('Please check {} for output'.format(outputPath))
       case 0:
         print('Thank you for using Visionary')
       case _:

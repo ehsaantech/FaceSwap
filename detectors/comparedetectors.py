@@ -1,12 +1,8 @@
 from utilities.image import readImage, writeImage
 from utilities.videoprocessor import VideoProcessor
-from images.imagelist import imageList
-from videos.videolist import videoList
-from detectors.detectorlist import detectorList
-
-images = imageList
-videos = videoList
-detectors = detectorList
+from images.imagelist import imageList as images
+from videos.videolist import videoList as videos
+from detectors.detectorlist import detectorList as detectors
 
 def compareDetectors(outputDirName) -> str:
   outputDirPath = '{0}/{1}'.format(outputDirName, 'detectors')

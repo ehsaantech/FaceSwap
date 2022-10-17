@@ -1,32 +1,25 @@
 import logging
+from utilities.cli import takeCliOptionSelection
 from utilities.image import readImage, writeImage
 from utilities.videoprocessor import VideoProcessor
-from images.imagelist import imageList
-from videos.videolist import videoList
-from detectors.detectorlist import detectorList
-from predictors.predictorlist import predictorList
+from images.imagelist import imageList as images
+from videos.videolist import videoList as videos
+from detectors.detectorlist import detectorList as detectors
+from predictors.predictorlist import predictorList as predictors
 
-images = imageList
-videos = videoList
-detectors = detectorList
-predictors = predictorList
-
-def comparePredictors(outputDirName) -> str:
-  print('Please choose a detector from the following:')
-  for index, (_, detectorName) in enumerate(detectors):
-    print('{0} -> {1}'.format(index, detectorName))
-  
-  selection = int(input('Type Option Number to select -> '))
-  logging.debug('User selected {}'.format(selection))
-
-  if selection >= 0 and selection < len(detectors):
-    _comparePredictors(outputDirName, detectors[selection])
-  else:
-    return 'Incorrect selection value for detector. Aborting'
-
-def _comparePredictors(outputDirName, detector) -> str:
-  (detectorClass, detectorName) = detector
+def comparePredictorsCli(outputDirName) -> str:
   outputDirPath = '{0}/{1}'.format(outputDirName, 'predictors')
+  try:
+    selection = takeCliOptionSelection([d[1] for d in detectors], 'detector')
+    comparePredictors(detectors[selection], outputDirPath)
+  except Exception as exception:
+    logging.warning(exception)
+    return
+
+  return outputDirPath
+
+def comparePredictors(detector, outputDirPath):
+  (detectorClass, detectorName) = detector
   detector = detectorClass()
   for (predictorClass, predictorName) in predictors:
     predictor = predictorClass()
@@ -60,5 +53,3 @@ def _comparePredictors(outputDirName, detector) -> str:
       outputPath = '{0}/{1}-hull-{2}-{3}.{4}'.format(outputDirPath, videoName, predictorName, detectorName, videoExtension)
       videoprocessor = VideoProcessor(videoPath, outputPath, processHull)
       videoprocessor.start()
-
-  return outputDirPath

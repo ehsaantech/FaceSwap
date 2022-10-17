@@ -236,3 +236,25 @@ def face_swap(src_face, dst_face, src_points, dst_points, dst_shape, dst_img, ar
     dst_img_cp[y:y + h, x:x + w] = output
 
     return dst_img_cp
+
+def face_swap_custom(src_face, dst_face, src_points, dst_points):
+    h, w = dst_face.shape[:2]
+
+    # 3d warp
+    warped_src_face = warp_image_3d(src_face, src_points, dst_points, (h, w))
+    
+    # Mask for blending
+    mask = mask_from_points((h, w), dst_points)
+    mask_src = np.mean(warped_src_face, axis=2) > 0
+    mask = np.asarray(mask * mask_src, dtype=np.uint8)
+
+    # Correct color
+    warped_src_face = apply_mask(warped_src_face, mask)
+    dst_face_masked = apply_mask(dst_face, mask)
+    warped_src_face = correct_colours(dst_face_masked, warped_src_face, dst_points)
+    
+    #Poisson Blending
+    r = cv2.boundingRect(mask)
+    center = ((r[0] + int(r[2] / 2), r[1] + int(r[3] / 2)))
+    output = cv2.seamlessClone(warped_src_face, dst_face, mask, center, cv2.NORMAL_CLONE)
+    return output
