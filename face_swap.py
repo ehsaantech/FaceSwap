@@ -244,7 +244,7 @@ def face_swap_custom(src_face, dst_face, src_points, dst_points):
     warped_src_face = warp_image_3d(src_face, src_points, dst_points, (h, w))
     
     # Mask for blending
-    mask = mask_from_points((h, w), dst_points)
+    mask = mask_from_points((h, w), dst_points, erode_flag=False)
     mask_src = np.mean(warped_src_face, axis=2) > 0
     mask = np.asarray(mask * mask_src, dtype=np.uint8)
 
