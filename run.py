@@ -19,22 +19,21 @@ if __name__ == '__main__':
     print('0 -> Exit')
     selection = int(input('Type Option Number to select -> '))
     logging.debug('User selected {}'.format(selection))
-    match selection:
-      case 1:
-        outputPath = compareDetectors(outputDirName='output')
-        print('Please check {} for output'.format(outputPath))
-      case 2:
-        outputPath = comparePredictorsCli(outputDirName='output')
-        print('Please check {} for output'.format(outputPath))
-      case 3:
-        outputPath = faceswapCli(outputDirName='output')
-        print('Please check {} for output'.format(outputPath))
-      case 4:
-        outputPath = morphCli(outputDirName='output')
-        print('Please check {} for output'.format(outputPath))
-      case 0:
-        print('Thank you for using Visionary')
-      case _:
-        print('Invalid option selected. Please try again.')
+    if selection == 1:
+      outputPath = compareDetectors(outputDirName='output')
+      print('Please check {} for output'.format(outputPath))
+    elif selection == 2:
+      outputPath = comparePredictorsCli(outputDirName='output')
+      print('Please check {} for output'.format(outputPath))
+    elif selection == 3:
+      outputPath = faceswapCli(outputDirName='output')
+      print('Please check {} for output'.format(outputPath))
+    elif selection == 4:
+      outputPath = morphCli(outputDirName='output')
+      print('Please check {} for output'.format(outputPath))
+    elif selection == 0:
+      print('Thank you for using Visionary')
+    else:
+      print('Invalid option selected. Please try again.')
   
   

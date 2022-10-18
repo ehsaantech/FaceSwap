@@ -39,3 +39,6 @@ nosetests.xml
 .pydevproject
 
 output/*
+
+
+venv
