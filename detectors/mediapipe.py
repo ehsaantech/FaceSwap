@@ -3,6 +3,7 @@ import cv2
 import dlib
 import mediapipe
 from detectors.detector import Detector
+from detectors.detectorProperties import detectionConfidence
 
 mp_face_detection = mediapipe.solutions.face_detection
 # mp_drawing = mediapipe.solutions.drawing_utils
@@ -22,16 +23,18 @@ class MediapipeDetector(Detector):
 
     faces = []
     for face in result.detections:
-      boundingBox = face.location_data.relative_bounding_box
-      (imgHeight, imgWidth, _) = img.shape
-        
-      x = int(boundingBox.xmin * imgWidth)
-      w = int(boundingBox.width * imgWidth)
-      y = int(boundingBox.ymin * imgHeight)
-      h = int(boundingBox.height * imgHeight)
+      confidence = face.score[0]
+      if confidence > detectionConfidence:
+        boundingBox = face.location_data.relative_bounding_box
+        (imgHeight, imgWidth, _) = img.shape
+          
+        x = int(boundingBox.xmin * imgWidth)
+        w = int(boundingBox.width * imgWidth)
+        y = int(boundingBox.ymin * imgHeight)
+        h = int(boundingBox.height * imgHeight)
 
-      rect = dlib.rectangle(left=x, top=y, right=x + w, bottom=y + h)
-      faces.append(rect)
+        rect = dlib.rectangle(left=x, top=y, right=x + w, bottom=y + h)
+        faces.append(rect)
 
     logging.debug('Number of faces detected: {}'.format(len(faces)))
     return faces

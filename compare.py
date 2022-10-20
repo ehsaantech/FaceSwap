@@ -1,9 +1,6 @@
 #! /usr/bin/env python
-import os
 import random
 import cv2
-import argparse
-from time import sleep
 import dlib
 import numpy as np
 
@@ -14,15 +11,17 @@ https://github.com/davisking/dlib-models
 https://github.com/davisking/dlib
 https://github.com/ageitgey/face_recognition
 https://github.com/spmallick/learnopencv
-
+https://bleedai.com/5-easy-effective-face-detection-algorithms-in-python/
+https://github.com/chuanqi305/MobileNet-SSD/
+https://github.com/spmallick/learnopencv/tree/master/FaceDetectionComparison
+https://github.com/ipazc/mtcnn
+https://pyimagesearch.com/2018/02/26/face-detection-with-opencv-and-deep-learning/
 
 
 datasets:
 https://github.com/yinguobing/facial-landmark-dataset
-"""
 
-from face_detection import select_face, select_all_faces
-from face_swap import face_swap
+"""
 
 def detect_face_using_mmod_face_detector(img,upsample_times=1):
     # Ask the detector to find the bounding boxes of each face. The 1 in the
