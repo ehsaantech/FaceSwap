@@ -3,7 +3,7 @@ import dlib
 import cv2
 from mtcnn import MTCNN
 from detectors.detector import Detector
-from detectors.detectorProperties import detectionConfidence
+from detectors.detectorProperties import mtcnnDetectionConfidence
 
 class MtcnnDetector(Detector):
 
@@ -16,7 +16,7 @@ class MtcnnDetector(Detector):
     faces = []
     for detection in detections:
       confidence = float(detection['confidence'])
-      if confidence > detectionConfidence:
+      if confidence > mtcnnDetectionConfidence:
         (left, top, width, height) = detection['box']
         right = left + width
         bottom = top + height

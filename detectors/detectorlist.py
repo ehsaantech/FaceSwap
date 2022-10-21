@@ -6,13 +6,13 @@ from detectors.mmod import MModDetector
 from detectors.mtcnn import MtcnnDetector
 
 detectorList = [
-  (HogSvmFaceDetector, 'hog_svm'),
-  (MediapipeDetector, 'mediapipe'),
-  (haarcascade_default, 'haar_default'),
-  (haarcascade_alt, 'haar_alt'),
-  (haarcascade_alt2, 'haar_alt1'),
-  (haarcascade_alt_tree, 'haar_alt_tree'),
-  (DnnCaffeDetector, 'dnn_caffe'),
-  (MtcnnDetector, 'mtcnn'),
-  (MModDetector, 'mmod'),
+  (HogSvmFaceDetector, 'hog_svm', 1),
+  (MediapipeDetector, 'mediapipe', 1),
+  (haarcascade_default, 'haar_default', 1),
+  (haarcascade_alt, 'haar_alt', 1),
+  (haarcascade_alt2, 'haar_alt1', 1),
+  (haarcascade_alt_tree, 'haar_alt_tree', 1),
+  (DnnCaffeDetector, 'dnn_caffe', 2),
+  (MtcnnDetector, 'mtcnn', 3),
+  (MModDetector, 'mmod', 1),
 ]

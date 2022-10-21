@@ -7,12 +7,14 @@ from utilities.image import readImage, writeImage
 from utilities.videoprocessor import VideoProcessor
 from images.imagelist import imageList as images
 from videos.videolist import videoList as videos
-from detectors.detectorlist import detectorList as detectors
+from detectors.detectorlist import detectorList as simpleDetectors
+from detectors.aggregatorslist import detectorList as aggregatedDetectors
 from predictors.predictorlist import predictorList as predictors
 
 def faceswapCli(outputDirName) -> str:
   outputDirPath = '{0}/{1}'.format(outputDirName, 'faceswap')
   try:
+    detectors = simpleDetectors + aggregatedDetectors
     detectorSelection = takeCliOptionSelection([d[1] for d in detectors], 'detector')
     predictorSelection = takeCliOptionSelection([p[1] for p in predictors], 'predictor')
     sourceSelection = takeCliOptionSelection([img[0] for img in images], 'source image')
@@ -22,7 +24,7 @@ def faceswapCli(outputDirName) -> str:
     targetOptions = imagesCopy + videos
     targetSelection = takeCliOptionSelection([t[0] for t in targetOptions], 'target')
 
-    (detectorClass, detectorName) = detectors[detectorSelection]
+    (detectorClass, detectorName, _) = detectors[detectorSelection]
     (predictorClass, predictorName) = predictors[predictorSelection]
     (srcPath, srcName, _) = images[sourceSelection]
     (targetPath, targetName, targetExtension) = targetOptions[targetSelection]

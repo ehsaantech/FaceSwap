@@ -2,7 +2,7 @@ import dlib
 import logging
 import cv2
 from detectors.detector import Detector
-from detectors.detectorProperties import detectionConfidence
+from detectors.detectorProperties import cafferDetectionConfidence
 
 class DnnCaffeDetector(Detector):
 
@@ -18,11 +18,10 @@ class DnnCaffeDetector(Detector):
     blob = cv2.dnn.blobFromImage(img, scalefactor=1.0, size=(300, 300), mean=[104, 117, 123], swapRB=False, crop=False)
     self.detector.setInput(blob)
     detections = self.detector.forward()
-
     faces = []
     for face in detections[0][0]:
       confidence = face[2]
-      if confidence > detectionConfidence:
+      if confidence > cafferDetectionConfidence:
         bbox = face[3:]
 
         left = int(bbox[0] * width)
