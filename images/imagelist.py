@@ -13,5 +13,7 @@ imageList = [
   ('images/test12.png', 'test12', 'png'),
   ('images/test13.png', 'test13', 'png'),
   ('images/test14.jpg', 'test14', 'jpg'),
-  ('images/test15.png', 'test15', 'png')
+  ('images/test15.png', 'test15', 'png'),
+  ('images/m1.jpg', 'm1', 'jpg'),
+  ('images/m2.jpg', 'm2', 'jpg')
 ]

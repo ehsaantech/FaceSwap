@@ -23,6 +23,9 @@ class DnnCaffeDetector(Detector):
       confidence = face[2]
       if confidence > cafferDetectionConfidence:
         bbox = face[3:]
+        if bbox[0] > 1 or bbox[1] > 1:
+          logging.debug('ignore detection due to bound issues left -> {0} top -> {1}'.format(bbox[0], bbox[1]))
+          continue
 
         left = int(bbox[0] * width)
         top = int(bbox[1] * height)

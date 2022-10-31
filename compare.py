@@ -16,6 +16,8 @@ https://github.com/chuanqi305/MobileNet-SSD/
 https://github.com/spmallick/learnopencv/tree/master/FaceDetectionComparison
 https://github.com/ipazc/mtcnn
 https://pyimagesearch.com/2018/02/26/face-detection-with-opencv-and-deep-learning/
+https://www.youtube.com/watch?v=V9bzew8A1tc
+https://www.youtube.com/watch?v=tW7EENTWXRk
 
 
 datasets:
